@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .newList{
+            height: 100px;
+            overflow: hidden;
+            background-color: #ccc;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="newList" id="newList1">
+        <div class="newBody">
+            <ul>
+                <li>一切都是对象</li>
+                <li>对象是属性的集合</li>
+                <li>对象是由函数创建的</li>
+                <li>this无处不在</li>
+                <li>this是在调用时才确定</li>
+                <li>一切都是对象</li>
+                <li>对象是属性的集合</li>
+                <li>对象是由函数创建的</li>
+                <li>this无处不在</li>
+                <li>this是在调用时才确定</li>
+                <li>------------------------------------</li>
+            </ul>
+        </div>
+    </div>
+    <hr>
+    <div class="newList" id="newList2">
+        <div class="newBody">
+            <ul>
+                <li>一切都是对象</li>
+                <li>对象是属性的集合</li>
+                <li>对象是由函数创建的</li>
+                <li>this无处不在</li>
+                <li>this是在调用时才确定</li>
+                <li>一切都是对象</li>
+                <li>对象是属性的集合</li>
+                <li>对象是由函数创建的</li>
+                <li>this无处不在</li>
+                <li>this是在调用时才确定</li>
+                <li>------------------------------------</li>
+            </ul>
+        </div>
+    </div>
+<script>
+    function NewList(newListId){
+        this.newList=document.getElementById(newListId);
+        this.ul=this.newList.getElementsByTagName("ul")[0];
+        this.ulHeight=this.ul.offsetHeight;
+        this.init();
+        this.start();
+    }
+    NewList.prototype.init=function(){
+        var that=this;
+        this.ul.innerHTML +=this.ul.innerHTML;
+        this.ul.style.position="absolute";
+        this.ul.style.top="0";
+
+        this.ul.onmouseover = function(){
+            clearInterval(that.timer)
+        }
+        this.ul.onmouseout=function(){
+            that.start();
+        }
+    }
+    NewList.prototype.start=function(){
+        this.timer=setInterval(()=>{
+            this.go();
+        },100)
+    }
+    NewList.prototype.go = function(){
+            var top = Math.abs(parseInt(this.ul.style.top));
+            if(top>=this.ulHeigth){
+                this.ul.style.top="0";
+            }else{
+                this.ul.style.top=parseInt(this.ul.style.top)-2+"px";
+            }
+    }
+    var n1 = new NewList("newList1");
+    var n2 = new NewList("newList2");
+</script>
+</body>
+</html>
+
+
+
+
+
+
